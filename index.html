@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master - Interactive Quiz Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
+        <div class="home-content">
+            <h1>🎓 Quiz Master</h1>
+            <p class="subtitle">Test Your Knowledge</p>
+            
+            <div class="quiz-selection">
+                <div class="quiz-card" onclick="startQuiz('class-x')">
+                    <h3>📚 Class X Mega Quiz</h3>
+                    <p>40 Questions | Science, Maths, SST, Grammar</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+                
+                <div class="quiz-card" onclick="startQuiz('gk')">
+                    <h3>🌍 General Knowledge</h3>
+                    <p>30 Questions | History, Geography, Science</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+                
+                <div class="quiz-card" onclick="startQuiz('programming')">
+                    <h3>💻 Programming Basics</h3>
+                    <p>25 Questions | JavaScript, Python, HTML/CSS</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quizPage" class="page">
+        <div class="quiz-header">
+            <div class="quiz-info">
+                <h2 id="quizTitle"></h2>
+                <p>Question <span id="currentQuestion">1</span> of <span id="totalQuestions">40</span></p>
+            </div>
+            <div class="quiz-timer">
+                <span id="timer">00:00</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <div class="quiz-content">
+            <div id="questionContainer"></div>
+            <div id="optionsContainer"></div>
+        </div>
+
+        <div class="quiz-footer">
+            <button class="btn btn-secondary" onclick="previousQuestion()">← Previous</button>
+            <button class="btn btn-secondary" onclick="skipQuestion()">Skip</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+        </div>
+    </div>
+
+    <!-- Result Page -->
+    <div id="resultPage" class="page">
+        <div class="result-content">
+            <div class="score-display">
+                <h2>Quiz Completed! 🎉</h2>
+                <div class="score-box">
+                    <p class="score-text">Your Score</p>
+                    <p class="score-value" id="finalScore">0 / 40</p>
+                    <p class="score-percentage" id="scorePercentage">0%</p>
+                </div>
+            </div>
+
+            <div class="certificate-form">
+                <h3>Generate Certificate</h3>
+                <div class="form-group">
+                    <label for="participantName">Enter Your Name:</label>
+                    <input type="text" id="participantName" placeholder="Full Name" required>
+                </div>
+                <button class="btn btn-success" onclick="generateCertificate()">📄 Download Certificate</button>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn btn-secondary" onclick="goHome()">← Back to Home</button>
+                <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Certificate Template (Hidden) -->
+<div id="certificateTemplate" style="display:none;">
+    <div class="certificate">
+        <div class="certificate-content">
+            <div class="certificate-header">
+                <h1>Certificate of Achievement</h1>
+            </div>
+            
+            <div class="certificate-body">
+                <p class="certificate-label">This is to certify that</p>
+                <p class="certificate-name" id="certName">_________________</p>
+                <p class="certificate-text">has successfully completed the</p>
+                <p class="certificate-quiz" id="certQuiz">Quiz Master Challenge</p>
+                
+                <div class="certificate-scores">
+                    <p>Score: <span id="certScore">0</span> / <span id="certTotal">40</span></p>
+                    <p>Percentage: <span id="certPercentage">0</span>%</p>
+                </div>
+                
+                <p class="certificate-date">Date: <span id="certDate"></span></p>
+            </div>
+            
+            <div class="certificate-footer">
+                <p>Quiz Master © 2024</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
